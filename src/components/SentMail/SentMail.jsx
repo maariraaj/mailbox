@@ -40,23 +40,29 @@ const SentMail = () => {
       content = <div>No data found</div>;
     } else {
       const mailId = localStorage.getItem('mailId').split(/[.@]/).join("");
-      content = data.map((item) => {
-        if (item.from.split(/[.@]/).join("") === mailId) {
-          return (
-            <div className="col" key={item.id}>
-              <div className="card border-dark p-4 rounded bg-light" style={{ boxShadow: '0px 0px 5px 0px black', position: 'relative' }}>
-                <NavLink to={`/sent/${item.id}`} className="text-decoration-none text-dark" >
-                  <div className="card-body">
-                    <h5 className="card-title">To:{' '}{item.to}</h5>
-                    <p className="card-text">Subject:{' '}{item.subject}</p>
-                    <p className="card-text">Content:{' '}{truncateContent(item.content.blocks[0].text, 100)}</p>
-                  </div>
-                </NavLink>
+      const mails = data.find(item => item.from.split(/[.@]/).join("") === mailId);
+
+      if (mails) {
+        content = data.map((item) => {
+          if (item.from.split(/[.@]/).join("") === mailId) {
+            return (
+              <div className="col" key={item.id}>
+                <div className="card border-dark p-4 rounded bg-light" style={{ boxShadow: '0px 0px 5px 0px black', position: 'relative' }}>
+                  <NavLink to={`/sent/${item.id}`} className="text-decoration-none text-dark" >
+                    <div className="card-body">
+                      <h5 className="card-title">To:{' '}{item.to}</h5>
+                      <p className="card-text">Subject:{' '}{item.subject}</p>
+                      <p className="card-text">Content:{' '}{truncateContent(item.content.blocks[0].text, 100)}</p>
+                    </div>
+                  </NavLink>
+                </div>
               </div>
-            </div>
-          )
-        }
-      });
+            )
+          }
+        });
+      } else {
+        content = <div>No sent mails found</div>;
+      }
     }
   } else if (status === 'failed') {
     content = <div>{error}</div>;

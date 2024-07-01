@@ -8,7 +8,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, user } = useSelector((state) => state.signup);
@@ -21,7 +21,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (password !== confirmPassword) {
       setPasswordError('Passwords do not match');
       return;
@@ -31,6 +31,9 @@ const SignUp = () => {
 
     dispatch(signUp({ email, password }));
   };
+  useEffect(() => {
+    setEmail("@pigeon.com")
+  }, []);
 
   return (
     <div className="container d-flex justify-content-center mt-5">
@@ -82,7 +85,8 @@ const SignUp = () => {
           </button>
         </form>
         <div className="text-center mt-3">
-          <Link to="/signin">Already have an account? Sign in here</Link>
+          Already have an account?
+          <Link to="/signin">Sign in here</Link>
         </div>
       </div>
     </div>

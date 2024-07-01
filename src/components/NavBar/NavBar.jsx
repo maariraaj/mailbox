@@ -37,7 +37,7 @@ const NavBar = () => {
           className="d-inline-block align-top me-1 ms-3"
           alt="Logo"
         />
-        <span style={{ marginLeft: '10px' }}>MailBox</span>
+        <span style={{ marginLeft: '10px' }}>Pigeon Mail</span>
       </NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
